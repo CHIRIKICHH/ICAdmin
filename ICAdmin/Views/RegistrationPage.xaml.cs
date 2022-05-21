@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ICAdmin.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,16 +14,17 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ICAdmin
+namespace ICAdmin.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Логика взаимодействия для RegistrationPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class RegistrationPage : Page
     {
-        public MainWindow()
+        public RegistrationPage()
         {
             InitializeComponent();
+            DataContext = new RegistrationViewModel();
         }
     }
 }
