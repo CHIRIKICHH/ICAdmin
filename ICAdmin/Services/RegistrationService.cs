@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ICAdmin.Services
 {
-    class Registration
+    class RegistrationService
     {
     }
 }

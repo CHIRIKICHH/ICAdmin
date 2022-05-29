@@ -4,85 +4,18 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ICAdmin.Views"
-        Title="MainWindow" Height="Auto" Width="310"
-        AllowsTransparency ="True"
-        Background="{x:Null}"
-        WindowStyle="None"
-        ResizeMode="NoResize">
-    <Window.Resources>
-        <RectangleGeometry x:Key="rect" Rect="0 0 155 30"></RectangleGeometry>
-        <RectangleGeometry x:Key="rect2" Rect="0 -10 165 40" RadiusX="10" RadiusY="10"></RectangleGeometry>
-        <Style x:Key="TransparentBlackBack">
-            <Setter Property="ItemsControl.Background" Value="#F2181A24"></Setter>
-        </Style>
-    </Window.Resources>
-    <Border Width="Auto" Height="Auto" Name="windowFrame" CornerRadius="10,10,10,10" >
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="35"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="15"/>
-            </Grid.RowDefinitions>
+        xmlns:model="clr-namespace:ICAdmin.Models"
+        xmlns:viewmodel="clr-namespace:ICAdmin.ViewModels"
+        Style="{StaticResource WindowBlackStyle}"
+        Title="MainWindow" Height="Auto" Width="310">
 
-            <Border x:Name ="ToolBar" Mouse.MouseDown="ToolBar_MouseDown" Grid.Row="0" CornerRadius="10 10 0 0" Style ="{StaticResource TransparentBlackBack}"/>
-            <Rectangle Grid.Row="1"></Rectangle>
-            <Border Grid.Row="3" Style ="{StaticResource TransparentBlackBack}"></Border>
-
-
-            <!-- Шапка формы-->
-            <Grid Grid.Row="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Image Grid.Column="0" RenderOptions.BitmapScalingMode="HighQuality" Source="/Resources/IClogo.png" Width="20" Height="20" HorizontalAlignment="Left" Margin=" 15 0 0 0"></Image>
-                <TextBlock Grid.Column="0" TextOptions.TextFormattingMode="Ideal" TextOptions.TextRenderingMode="ClearType" Text="INVENT" FontSize="9" FontFamily="Conneqt" Margin ="37 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="White"/>
-
-                <!-- Кнопки управления окном-->
-                <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Horizontal" Margin="0 0 15 0">
-                    <Grid Height="20">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="30"/>
-                            <ColumnDefinition Width="30"/>
-                        </Grid.ColumnDefinitions>
-                        <Border Name="RollUpButton" Grid.Column="0" Background="Transparent" Cursor="Hand">
-                            <Rectangle  Grid.Column="0" Width="15" Height="2" RadiusX="1" RadiusY="1">
-                                <Rectangle.Style>
-                                    <Style TargetType="{x:Type Rectangle}">
-                                        <Setter Property="Fill" Value="#B2B2B2"/>
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding IsMouseOver, ElementName=RollUpButton}" Value="True">
-                                                <Setter Property="Fill" Value="White"/>
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Rectangle.Style>
-                            </Rectangle>
-                        </Border>
-                        <Border Name="CloseButton" Grid.Column="1">
-                            <Rectangle  Grid.Column="1" Width="15" Height="15" Stroke="#E72F2F" StrokeThickness="2" RadiusX="1" RadiusY="1" Cursor="Hand">
-                                <Rectangle.Style>
-                                    <Style TargetType="{x:Type Rectangle}">
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding IsMouseOver, ElementName=CloseButton}" Value="True">
-                                                <Setter Property="Fill" Value="#E72F2F"/>
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Rectangle.Style>
-                            </Rectangle>
-                        </Border>
-                    </Grid>
-                </StackPanel>
-            </Grid>
-
-            <Frame Source="LoginPage.xaml" Grid.Row="1"/>
-
-            <!-- Подвал -->
-            <StackPanel Grid.Row="3" Orientation="Horizontal"  HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5 0 0 0">
-                <Rectangle Width="5" Height="5" Fill="{Binding ServerConnectionColor, UpdateSourceTrigger=PropertyChanged}" RadiusX="5" RadiusY="5" ></Rectangle>
-                <TextBlock Text="{Binding ServerConnectionText, UpdateSourceTrigger=PropertyChanged}" TextOptions.TextRenderingMode="Aliased" FontSize="8" FontFamily="Rubik" Foreground='White' Margin="2 1 0 0"></TextBlock>
-            </StackPanel>
-        </Grid>
-    </Border>
+    <Window.DataContext>
+        <viewmodel:MainWindowViewModel/>
+    </Window.DataContext>
+    <Grid Grid.Row="1" Width="310">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Frame Source="LoginPage.xaml" Grid.Row="0" />
+    </Grid>
 </Window>

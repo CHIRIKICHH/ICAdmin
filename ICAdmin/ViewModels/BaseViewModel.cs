@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ICAdmin.Models;
+using ICAdmin.Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -8,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ICAdmin.ViewModels
 {
-    class ViewModel : INotifyPropertyChanged
+    class BaseViewModel : INotifyPropertyChanged
     {
         protected bool SetProperty<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
         {
@@ -26,5 +28,15 @@ namespace ICAdmin.ViewModels
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+
+        private CheckConnectionService checkConnection = new CheckConnectionService();
+        public CheckConnectionService CheckConnection
+        {
+            get
+            {
+                return checkConnection;
+            }
+        }
     }
 }
