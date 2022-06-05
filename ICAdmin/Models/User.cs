@@ -14,10 +14,8 @@ namespace ICAdmin.Models
         public string Password { get; set; }
         public DateTime CreationTime { get; set; }
         public DateTime LastLoginTime { get; set; }
+        public string? ErrorCode { get; set; }
+        public string? ErrorMessage { get; set; }
 
-        public static User GetInstance()
-        {
-            return currentUser ?? (currentUser = new User());
-        }
     }
 }

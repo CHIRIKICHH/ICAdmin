@@ -13,9 +13,9 @@ namespace ICAdmin.Models
 {
     internal class Server : BaseVM
     {
-        public readonly string Domain = "http://chirikichh.ru";
-        public readonly int Port = 32000;
-
+        public static readonly string Domain = "http://chirikichh.ru";
+        public static readonly int Port = 32000;
+        public static bool IsConnected { get; set; }
         public Server()
         {
 

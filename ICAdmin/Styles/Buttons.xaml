@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     >
 
-    <!--<Style x:Key="BaseButton" TargetType="Button">
+    <Style x:Key="BaseButton" TargetType="Button">
         <Setter Property="Background" Value="{StaticResource MediumBaseBrush}" />
         <Setter Property="FontFamily" Value="{StaticResource BaseFont}" />
         <Setter Property="FontSize" Value="{StaticResource Regular}" />
@@ -39,7 +39,7 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-    </Style>-->
+    </Style>
 
     <Style x:Key="CloseButton" TargetType="Button">
         <Setter Property="Background" Value="Transparent"/>
@@ -70,11 +70,15 @@
                             <Setter Property="Background" Value="#F38989" />
                             <Setter Property="BorderBrush" Value="#F38989"/>
                         </Trigger>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Trigger.ExitActions/>
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <!--<Setter Property="Template">
+        
+        <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border Background="Transparent" Width="20" Height="20">
@@ -104,6 +108,6 @@
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
-        </Setter>-->
+        </Setter>
     </Style>
 </ResourceDictionary>

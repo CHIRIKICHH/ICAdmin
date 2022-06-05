@@ -1,9 +1,11 @@
 ﻿using ICAdmin.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -13,35 +15,34 @@ namespace ICAdmin.Services
 {
     class AuthorizationService
     {
-        private static Server server = new Server();
-        public static async Task<User> GetUser(string Login, string Password)
+        private static CheckConnectionService _connectionService = CheckConnectionService.GetInstance();
+        private string _authorizationToken;
+        public static async Task<User> AuthorizationAsync(string Login, string Password)
         {
-            try
-            {
-                WebRequest request = WebRequest.Create($"{server.Domain}:{server.Port}/api/Account/LoginUser?Login={Login}&Password={Password}");
-                request.Method = "GET";
-                WebResponse response = await request.GetResponseAsync();
-                string answer = string.Empty;
-                User? user = null;
-                using (Stream s = response.GetResponseStream())
+            if (_connectionService.IsServerConnected)
+                try
                 {
-                    using (StreamReader reader = new StreamReader(response.GetResponseStream()))
-                    {
-
-                        user = await JsonSerializer.DeserializeAsync<User>(reader.BaseStream);
-                    }
+                    var client = new HttpClient();
+                    string resultJson = await client.GetStringAsync($"{Server.Domain}:{Server.Port}/api/Account/LoginUser?Login={Login}&Password={Password}");
+                    User user = JsonConvert.DeserializeObject<User>(resultJson);
+                    if (user.ErrorCode == null)
+                        return user;
+                    else
+                        return null;
                 }
-                response.Close();
-                return user;
-            }
-            catch (WebException ex)
+                catch (WebException ex)
+                {
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return null;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return null;
+                }
+            else
             {
-                MessageBox.Show("Ошибка", ex.Message, MessageBoxButton.OK, MessageBoxImage.Error);
-                return null;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Ошибка", ex.Message, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Нет подключения к серверу", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return null;
             }
         }

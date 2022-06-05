@@ -1,9 +1,11 @@
 ﻿using ICAdmin.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,7 +13,7 @@ namespace ICAdmin.Services
 {
     internal class CheckConnectionService : BaseVM
     {
-        Server server = new Server();
+        private static CheckConnectionService instance;
         private bool isServerConnected;
 
         public bool IsServerConnected
@@ -35,18 +37,9 @@ namespace ICAdmin.Services
             {
                 try
                 {
-                    WebRequest request = WebRequest.Create($"{server.Domain}:{server.Port}/api");
-                    request.Method = "Get";
-                    WebResponse response = await request.GetResponseAsync();
-                    string answer = string.Empty;
-                    using (Stream s = response.GetResponseStream())
-                    {
-                        using (StreamReader reader = new StreamReader(response.GetResponseStream()))
-                        {
-                            answer = await reader.ReadToEndAsync();
-                        }
-                    }
-                    response.Close();
+                    var client = new HttpClient();
+                    string resultJson = await client.GetStringAsync($"{Server.Domain}:{Server.Port}/api");
+                    bool result = JsonConvert.DeserializeObject<bool>(resultJson);
                     if (!IsServerConnected)
                         IsServerConnected = true;
                 }
@@ -56,6 +49,15 @@ namespace ICAdmin.Services
                 }
                 await Task.Delay(5000);
             }
+        }
+
+        public static CheckConnectionService GetInstance()
+        {
+            if(instance == null)
+            {
+                instance = new CheckConnectionService();
+            }
+            return instance;
         }
     }
 }

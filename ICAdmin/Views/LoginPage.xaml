@@ -73,7 +73,7 @@
                 <TextBox Text="{Binding Password}"  Width="260" Height="40" FontFamily="Roboto" FontSize="14" FontWeight="Bold"/>
             </StackPanel>
 
-            <!--<Button Style="{StaticResource BaseButton}" Content="Авторизоваться" Grid.Row="3" Width="260" Height="35"/>-->
+            <Button Style="{StaticResource BaseButton}" Command="{Binding LoginCommand}" Content="Авторизоваться" Grid.Row="3" Width="260" Height="35"/>
 
             <Label Content="{Binding IsLogged}" HorizontalAlignment="Center" Grid.Row="4" VerticalAlignment="Center"/>
 

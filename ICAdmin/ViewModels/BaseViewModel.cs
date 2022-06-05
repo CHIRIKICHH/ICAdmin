@@ -30,7 +30,7 @@ namespace ICAdmin.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
 
 
-        private CheckConnectionService checkConnection = new CheckConnectionService();
+        private CheckConnectionService checkConnection = CheckConnectionService.GetInstance();
         public CheckConnectionService CheckConnection
         {
             get
@@ -38,5 +38,7 @@ namespace ICAdmin.ViewModels
                 return checkConnection;
             }
         }
+
+
     }
 }

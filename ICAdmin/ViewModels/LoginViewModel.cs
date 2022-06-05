@@ -56,9 +56,9 @@ namespace ICAdmin.ViewModels
             get
             {
                 return loginCommand ??
-                    (loginCommand = new RelayCommand(obj =>
+                    (loginCommand = new RelayCommand(async obj =>
                     {
-                        User user = AuthorizationService.GetUser(Login, Password).Result;
+                        User user = await AuthorizationService.AuthorizationAsync(Login, Password);
                         if (user != null)
                             IsLogged = true;
                         else
