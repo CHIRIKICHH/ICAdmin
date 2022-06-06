@@ -56,15 +56,25 @@ namespace ICAdmin.ViewModels
             get
             {
                 return loginCommand ??
-                    (loginCommand = new RelayCommand(async obj =>
-                    {
-                        User user = await AuthorizationService.AuthorizationAsync(Login, Password);
-                        if (user != null)
-                            IsLogged = true;
-                        else
-                            IsLogged = false;
-                    }));
+                    (loginCommand = new RelayCommand(param => Authorization(param), param => CanAuth(param)));
             }
+        }
+
+        private async void Authorization(object param)
+        {
+            User user = await AuthorizationService.AuthorizationAsync(Login, Password);
+
+            if (user != null)
+                IsLogged = true;
+            else
+                IsLogged = false;
+        }
+
+        private bool CanAuth(object param)
+        {
+            if (!string.IsNullOrEmpty(Login) && !string.IsNullOrEmpty(Password))
+                return true;
+            return false;
         }
     }
 }

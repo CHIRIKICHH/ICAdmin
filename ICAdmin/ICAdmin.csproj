@@ -9,7 +9,8 @@
 
   <ItemGroup>
     <None Remove="Resources\IClogo.png" />
-    <None Remove="Resources\UserIco.png" />
+    <None Remove="Resources\UserIcon.png" />
+    <None Remove="Resources\UserWhiteIcon.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,7 +23,10 @@
     <Resource Include="Resources\IClogo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Resources\UserIco.png">
+    <Resource Include="Resources\UserIcon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\UserWhiteIcon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

@@ -1,4 +1,5 @@
-﻿using ICAdmin.Models;
+﻿using ICAdmin.Commands;
+using ICAdmin.Models;
 using ICAdmin.Services;
 using System;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace ICAdmin.ViewModels
 {
@@ -38,7 +40,5 @@ namespace ICAdmin.ViewModels
                 return checkConnection;
             }
         }
-
-
     }
 }

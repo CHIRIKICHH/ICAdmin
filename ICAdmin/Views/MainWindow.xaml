@@ -3,11 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:sys="clr-namespace:System.Windows;assembly=PresentationFramework"
         xmlns:local="clr-namespace:ICAdmin.Views"
         xmlns:model="clr-namespace:ICAdmin.Models"
         xmlns:viewmodel="clr-namespace:ICAdmin.ViewModels"
         Style="{StaticResource WindowBlackStyle}"
-        Title="MainWindow" Height="Auto" Width="310">
+        Title="ICAdmin" Height="Auto" Width="310" Icon="/Resources/IClogo.png">
 
     <Window.DataContext>
         <viewmodel:MainWindowViewModel/>
@@ -16,6 +17,6 @@
         <Grid.RowDefinitions>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Frame Source="LoginPage.xaml" Grid.Row="0" />
+        <Frame Source="LoginPage.xaml" Grid.Row="0"/>
     </Grid>
 </Window>
