@@ -2,6 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
     <FontFamily x:Key="BaseFont">Roboto</FontFamily>
+    <FontFamily x:Key="Conneqt">pack://application:,,,/Resources/#Conneqt</FontFamily>
+    <FontFamily x:Key="Password">pack://application:,,,/Resources/#password</FontFamily>
     <system:Double x:Key="Small">14</system:Double>
     <system:Double x:Key="Regular">16</system:Double>
     <system:Double x:Key="Big">20</system:Double>

@@ -11,17 +11,18 @@ namespace ICAdmin.ViewModels
 {
     class LoginViewModel : BaseViewModel
     {
+
         private string login;
         private string password;
-        private bool isLogged;
+        private bool isNotLogged;
 
-        public bool IsLogged
+        public bool IsNotLogged
         {
-            get { return isLogged; }
+            get { return isNotLogged; }
             set
             {
-                isLogged = value;
-                OnPropertyChanged("IsLogged");
+                isNotLogged = value;
+                OnPropertyChanged("IsNotLogged");
             }
         }
         public string Login
@@ -62,17 +63,15 @@ namespace ICAdmin.ViewModels
 
         private async void Authorization(object param)
         {
-            User user = await AuthorizationService.AuthorizationAsync(Login, Password);
-
-            if (user != null)
-                IsLogged = true;
-            else
-                IsLogged = false;
+            User user = await AuthorizationService.AuthorizationAsync(login, password);
+            if (CheckConnection.IsServerConnected)
+                if (user == null)
+                    IsNotLogged = true;
         }
 
         private bool CanAuth(object param)
         {
-            if (!string.IsNullOrEmpty(Login) && !string.IsNullOrEmpty(Password))
+            if (!string.IsNullOrEmpty(login) && !string.IsNullOrEmpty(password))
                 return true;
             return false;
         }

@@ -9,6 +9,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="285" d:DesignWidth="310"
       Title="LoginPage"
+      FocusManager.FocusedElement="{Binding ElementName=LoginTextBox}"
       >
 
     <Page.Resources>
@@ -43,13 +44,7 @@
                     </CombinedGeometry>
                 </Path.Data>
             </Path>
-            <Border Grid.Column="1" Background ="{StaticResource TransparentBlackBack}" CornerRadius=" 0 0 0 10">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="MouseDown">
-                        <i:InvokeCommandAction Command="{Binding Path=MyCommand}" />
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </Border>
+            <Border Grid.Column="1" Background ="{StaticResource TransparentBlackBack}" CornerRadius=" 0 0 0 10"/>
             <TextBlock Grid.Column ="1" Foreground="White" Text="Регистрация"  FontSize="14" FontFamily="Roboto" FontWeight="Medium" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
         </Grid>
 
@@ -63,15 +58,61 @@
 
             <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="260">
                 <TextBlock Text="ЛОГИН" FontFamily="Roboto" FontSize="16" FontWeight="Bold" />
-                <TextBox  Text ="{Binding Login}" Width="260" Height="40" Style="{StaticResource BaseTextBox}"/>
+                <TextBox Text ="{Binding Login, Mode=TwoWay}" x:Name="LoginTextBox" Width="260" Height="40">
+                    <TextBox.Style>
+                        <Style BasedOn="{StaticResource LoginTextBox}" TargetType="TextBox">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Path=IsNotLogged}" Value="True">
+                                    <DataTrigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <ColorAnimation Storyboard.TargetProperty="(TextBox.Effect).(DropShadowEffect.Color)" Duration="0:0:1" To="#E72F2F"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </DataTrigger.EnterActions>
+
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBox.Style>
+                </TextBox>
             </StackPanel>
+
 
             <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="260">
                 <TextBlock Text="ПАРОЛЬ" FontFamily="Roboto" FontSize="16" FontWeight="Bold" />
-                <TextBox Text="{Binding Password}"  Width="260" Height="40" Style="{StaticResource BaseTextBox}" />
+                <TextBox Text="{Binding Password, Mode=TwoWay}" FontFamily="{StaticResource Password}" Width="260" Height="40" >
+                    <TextBox.Style>
+                        <Style BasedOn="{StaticResource PasswordTextBox}" TargetType="TextBox">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Path=IsNotLogged, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                                    <DataTrigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <ColorAnimation Storyboard.TargetProperty="(TextBox.Effect).(DropShadowEffect.Color)" Duration="0:0:1"  To="#E72F2F"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </DataTrigger.EnterActions>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBox.Style>
+                </TextBox>
             </StackPanel>
-
-            <Button Style="{StaticResource BaseButton}" Command="{Binding LoginCommand}" Content="Авторизоваться" Grid.Row="2" Width="260" Height="35"/>
+            <StackPanel Grid.Row="2" VerticalAlignment="Bottom">
+                <Button Style="{StaticResource BaseButton}" Command="{Binding LoginCommand}" Content="Авторизоваться" x:Name="LoginButton" Width="260" Height="35"/>
+                <TextBlock FontFamily="{StaticResource BaseFont}" HorizontalAlignment="Center" FontWeight="Bold" Margin="0 5 0 5" FontSize="11" Foreground="#E72F2F">
+                    <TextBlock.Style>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsNotLogged, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                                    <Setter Property="Text" Value="Неверные данные"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock> 
+            </StackPanel>
         </Grid>
     </Grid>
 </Page>

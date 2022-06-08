@@ -8,7 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Conneqt.TTF" />
     <None Remove="Resources\IClogo.png" />
+    <None Remove="Resources\password.ttf" />
     <None Remove="Resources\UserIcon.png" />
     <None Remove="Resources\UserWhiteIcon.png" />
   </ItemGroup>
@@ -20,8 +22,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\Conneqt.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\IClogo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\password.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\UserIcon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
