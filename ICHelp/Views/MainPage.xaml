@@ -1,0 +1,17 @@
+﻿<Page x:Class="ICHelp.Views.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+       xmlns:viewmodel="clr-namespace:ICHelp.ViewModels"
+      xmlns:local="clr-namespace:ICHelp.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="MainPage" Style="{StaticResource WindowBlackStyle}">
+    <Page.DataContext>
+        <viewmodel:MainPageViewModel/>
+    </Page.DataContext>
+    <Grid Background ="White" Width="310" Height ="420">
+        <TextBlock Text="{Binding AssignmentService.CommandName}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    </Grid>
+</Page>
