@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ICAdmin.Services
+namespace ICHelp.Models
 {
-    class RegistrationService
+    internal class Message
     {
     }
 }

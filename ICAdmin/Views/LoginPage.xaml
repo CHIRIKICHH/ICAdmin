@@ -4,22 +4,21 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-      xmlns:model="clr-namespace:ICAdmin.Models"
-      xmlns:viewmodel="clr-namespace:ICAdmin.ViewModels"
+      xmlns:model="clr-namespace:ICAdmin.Models" xmlns:viewmodel="clr-namespace:ICAdmin.ViewModels"
       mc:Ignorable="d" 
       d:DesignHeight="285" d:DesignWidth="310"
       Title="LoginPage"
       FocusManager.FocusedElement="{Binding ElementName=LoginTextBox}"
       >
-
+    <Page.DataContext>
+        <viewmodel:LoginViewModel/>
+    </Page.DataContext>
+    
     <Page.Resources>
         <RectangleGeometry x:Key="rect" Rect="0 0 155 30"></RectangleGeometry>
         <RectangleGeometry x:Key="rect2" Rect="0 -10 165 40" RadiusX="10" RadiusY="10"></RectangleGeometry>
     </Page.Resources>
-    <Page.DataContext>
-        <viewmodel:LoginViewModel/>
-    </Page.DataContext>
-
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
@@ -81,7 +80,7 @@
 
             <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="260">
                 <TextBlock Text="ПАРОЛЬ" FontFamily="Roboto" FontSize="16" FontWeight="Bold" />
-                <TextBox Text="{Binding Password, Mode=TwoWay}" FontFamily="{StaticResource Password}" Width="260" Height="40" >
+                <TextBox Text="{Binding Password, Mode=TwoWay}" x:Name="PasswordTextBox" FontFamily="{StaticResource Password}" Width="260" Height="40" >
                     <TextBox.Style>
                         <Style BasedOn="{StaticResource PasswordTextBox}" TargetType="TextBox">
                             <Style.Triggers>
