@@ -1,4 +1,5 @@
-﻿using ICHelp.Behavior;
+﻿using DevExpress.Mvvm;
+using ICHelp.Behavior;
 using ICHelp.Models;
 using Newtonsoft.Json;
 using System;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace ICHelp.Services
 {
-    internal class AssignmentService : BaseVM
+    internal class AssignmentService : BindableBase
     {
         private static AssignmentService instance;
         private Queue<Assignment> Assignments { get; set; } = new Queue<Assignment>();
@@ -24,7 +25,7 @@ namespace ICHelp.Services
             set
             {
                 commandName = value;
-                OnPropertyChanged("CommandName");
+                RaisePropertiesChanged("CommandName");
             }
         }
         public AssignmentService()

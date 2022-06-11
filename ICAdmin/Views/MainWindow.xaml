@@ -7,16 +7,13 @@
         xmlns:local="clr-namespace:ICAdmin.Views"
         xmlns:model="clr-namespace:ICAdmin.Models"
         xmlns:viewmodel="clr-namespace:ICAdmin.ViewModels"
+        SizeToContent="WidthAndHeight"
         Style="{StaticResource WindowBlackStyle}"
-        Title="ICAdmin" Height="Auto" Width="310" Icon="/Resources/IClogo.png">
+        DataContext="{Binding MainWindowViewModel, Source={StaticResource ViewModelLocator}}"
+        
+        Title="ICAdmin" Height="Auto" Width="Auto" Icon="/Resources/IClogo.png">
 
-    <Window.DataContext>
-        <viewmodel:MainWindowViewModel/>
-    </Window.DataContext>
-    <Grid Grid.Row="1" Width="310">
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Frame Source="LoginPage.xaml" Grid.Row="0"/>
+    <Grid Width="Auto">
+        <Frame Content="{Binding PageSource}" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>

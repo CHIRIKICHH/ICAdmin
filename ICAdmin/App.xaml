@@ -10,10 +10,12 @@
                 <ResourceDictionary Source="/Styles/Fonts.xaml"/>
                 <ResourceDictionary Source="/Styles/Animations.xaml"/>
                 <ResourceDictionary Source="/Styles/Icons.xaml"/>
+                <ResourceDictionary Source="/Styles/ScrollBar.xaml"/>
                 <ResourceDictionary Source="/Styles/Buttons.xaml"/>
                 <ResourceDictionary Source="/Styles/TextBoxes.xaml"/>
                 <ResourceDictionary Source="/Styles/WindowStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+        <local:ViewModelLocator x:Key="ViewModelLocator" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

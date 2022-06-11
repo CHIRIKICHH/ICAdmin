@@ -24,7 +24,6 @@ namespace ICAdmin.Views
         public LoginPage()
         {
             InitializeComponent();
-            DataContext = new LoginViewModel();
         }
     }
 }

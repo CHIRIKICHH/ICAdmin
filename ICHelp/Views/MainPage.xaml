@@ -12,6 +12,39 @@
         <viewmodel:MainPageViewModel/>
     </Page.DataContext>
     <Grid Background ="#F3F3F3" Width="310" Height ="420">
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+            <RowDefinition Height="45"/>
+        </Grid.RowDefinitions>
+
+        <ListView Grid.Row="1" BorderThickness="0" ItemsSource="{Binding Messages}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="10 0 0 15">
+                        
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <ListView BorderThickness="0" Grid.Row="2" Background="White" ItemsSource="{Binding UserMachines}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" HorizontalAlignment="Left" />
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="10 0 0 15">
+                        <Border Background="#373841" BorderThickness="0" CornerRadius="15" Width="70" Height="70">
+                            <Image Source="{Binding IsConnected, Converter={StaticResource ImageConverter}}" Width="45" Height="45"/>
+                        </Border>
+                        <TextBlock Text="{Binding InventoryName}" FontSize="{StaticResource Regular}" FontFamily="Rubik" FontWeight="Bold" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
     </Grid>
 </Page>

@@ -1,4 +1,5 @@
-﻿using ICHelp.Models;
+﻿using DevExpress.Mvvm;
+using ICHelp.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace ICHelp.Services
 {
-    internal class CheckConnectionService : BaseVM
+    public class CheckConnectionService : BindableBase
     {
         private static CheckConnectionService instance;
         private bool isServerConnected;
@@ -22,7 +23,7 @@ namespace ICHelp.Services
             set
             {
                 isServerConnected = value;
-                OnPropertyChanged("IsServerConnected");
+                RaisePropertiesChanged("IsServerConnected");
             }
         }
 

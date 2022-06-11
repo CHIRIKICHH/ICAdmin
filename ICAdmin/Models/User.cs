@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ICAdmin.Models
 {
-    internal class User
+    public class User
     {
         private static User currentUser;
         public int Id { get; set; }

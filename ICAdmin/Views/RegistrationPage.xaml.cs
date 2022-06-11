@@ -24,7 +24,6 @@ namespace ICAdmin.Views
         public RegistrationPage()
         {
             InitializeComponent();
-            DataContext = new RegistrationViewModel();
         }
     }
 }

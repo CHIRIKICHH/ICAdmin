@@ -5,21 +5,14 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
       xmlns:model="clr-namespace:ICAdmin.Models" xmlns:viewmodel="clr-namespace:ICAdmin.ViewModels"
+      DataContext="{Binding LoginViewModel, Source={StaticResource ViewModelLocator}}"
       mc:Ignorable="d" 
       d:DesignHeight="285" d:DesignWidth="310"
       Title="LoginPage"
       FocusManager.FocusedElement="{Binding ElementName=LoginTextBox}"
       >
-    <Page.DataContext>
-        <viewmodel:LoginViewModel/>
-    </Page.DataContext>
-    
-    <Page.Resources>
-        <RectangleGeometry x:Key="rect" Rect="0 0 155 30"></RectangleGeometry>
-        <RectangleGeometry x:Key="rect2" Rect="0 -10 165 40" RadiusX="10" RadiusY="10"></RectangleGeometry>
-    </Page.Resources>
-    
-    <Grid>
+
+    <Grid Width="310">
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition Height="255"/>
@@ -29,22 +22,13 @@
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
             <Border Background="White"></Border>
             <TextBlock Grid.Column ="0"  Text ="Вход" Foreground="#070707" FontSize="14" FontFamily="Roboto" FontWeight="Medium" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
-            <!-- Треугольник для кнопки Регистрация-->
-            <Path Grid.Column="1" Fill="White" >
-                <Path.Data>
-                    <CombinedGeometry GeometryCombineMode="Exclude"
-                            CombinedGeometry.Geometry1="{StaticResource rect}"
-                            CombinedGeometry.Geometry2="{StaticResource rect2}">
-                    </CombinedGeometry>
-                </Path.Data>
-            </Path>
-            <Border Grid.Column="1" Background ="{StaticResource TransparentBlackBack}" CornerRadius=" 0 0 0 10"/>
-            <TextBlock Grid.Column ="1" Foreground="White" Text="Регистрация"  FontSize="14" FontFamily="Roboto" FontWeight="Medium" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+
+            <Button Style="{StaticResource LeftTabButton}"  Grid.Column="1" Content="Регистрация" Command="{Binding ChangeRegistrationPage}" />
         </Grid>
 
 

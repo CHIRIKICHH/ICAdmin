@@ -1,4 +1,5 @@
-﻿using ICAdmin.Models;
+﻿using DevExpress.Mvvm;
+using ICAdmin.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -11,18 +12,17 @@ using System.Threading.Tasks;
 
 namespace ICAdmin.Services
 {
-    internal class CheckConnectionService : BaseVM
+    public class CheckConnectionService : BindableBase
     {
         private static CheckConnectionService instance;
-        private bool isServerConnected;
 
+        private bool isServerConnected;
         public bool IsServerConnected
         {
-            get { return isServerConnected; }
-            set
-            {
+            get => isServerConnected;
+            set {
                 isServerConnected = value;
-                OnPropertyChanged("IsServerConnected");
+                RaisePropertyChanged("IsServerConnected");
             }
         }
 

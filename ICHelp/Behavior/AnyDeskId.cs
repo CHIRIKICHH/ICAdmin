@@ -1,6 +1,10 @@
-﻿using System;
+﻿using ICHelp.Services;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.ServiceProcess;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,9 +15,10 @@ namespace ICHelp.Behavior
         public override string Execute(AssignmentType command)
         {
             if (command == AssignmentType.GetCurrentAnyDeskId)
-                return "AnyDesk ID = 12345678";
+                return new AnyDeskService().GetId();
             else
                 return base.Execute(command);
         }
+
     }
 }

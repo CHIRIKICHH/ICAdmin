@@ -1,4 +1,6 @@
-﻿using ICHelp.Models;
+﻿using DevExpress.Mvvm;
+using ICHelp.Models;
+using ICHelp.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,8 +10,26 @@ using System.Threading.Tasks;
 
 namespace ICHelp.ViewModels
 {
-    internal class MainPageViewModel : BaseViewModel
+    public class MainPageViewModel : BindableBase
     {
-        private ObservableCollection<Message> Messages = new ObservableCollection<Message>();
+        public ObservableCollection<Message> Messages { get; set; }
+
+        public MainPageViewModel()
+        {
+            Messages = new ObservableCollection<Message>();
+
+        }
+
+        private CheckConnectionService checkConnection = CheckConnectionService.GetInstance();
+        public CheckConnectionService CheckConnection
+        {
+            get => checkConnection;
+        }
+
+        private AssignmentService assignmentService = AssignmentService.GetInstance();
+        public AssignmentService AssignmentService
+        {
+            get => assignmentService;
+        }
     }
 }

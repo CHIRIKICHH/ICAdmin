@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace ICHelp.Models
 {
-    internal class Message
+    public class Message
     {
+        public int Id { get; set; }
+        public string Body { get; set; }
+        public User? Sender { get; set; }
+        public User? Recipient { get; set; }
     }
 }

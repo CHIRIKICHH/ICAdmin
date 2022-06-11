@@ -8,6 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\ComputerOffline.png" />
+    <None Remove="Resources\ComputerOnline.png" />
     <None Remove="Resources\Conneqt.TTF" />
     <None Remove="Resources\IClogo.png" />
     <None Remove="Resources\password.ttf" />
@@ -16,12 +18,21 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="DevExpressMvvm" Version="21.1.5" />
     <PackageReference Include="MaterialDesignThemes" Version="4.5.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.1" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="PropertyChanged.Fody" Version="3.4.1" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\ComputerOffline.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\ComputerOnline.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Conneqt.ttf">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>

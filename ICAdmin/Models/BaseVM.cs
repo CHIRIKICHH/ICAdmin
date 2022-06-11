@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ICAdmin.Models
 {
-    internal class BaseVM : INotifyPropertyChanged
+    public class BaseVM : INotifyPropertyChanged
     {
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {

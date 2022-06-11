@@ -102,4 +102,88 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style x:Key="LeftTabButton" TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <Path Fill="White">
+                            <Path.Data>
+                                <CombinedGeometry GeometryCombineMode="Exclude">
+                                    <CombinedGeometry.Geometry1>
+                                        <RectangleGeometry Rect="0 0 155 30"></RectangleGeometry>
+                                    </CombinedGeometry.Geometry1>
+                                    <CombinedGeometry.Geometry2>
+                                        <RectangleGeometry Rect="0 -10 165 40" RadiusX="10" RadiusY="10"></RectangleGeometry>
+                                    </CombinedGeometry.Geometry2>
+                                </CombinedGeometry>
+                            </Path.Data>
+                        </Path>
+                        <Border Background ="{StaticResource TransparentBlackBack}" CornerRadius=" 0 0 0 10">
+                            <TextBlock Foreground="White" Text="{TemplateBinding Content}"  FontSize="{StaticResource Small}" FontFamily="{StaticResource BaseFont}" FontWeight="Medium" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="RightTabButton" TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <Path Fill="White">
+                            <Path.Data>
+                                <CombinedGeometry GeometryCombineMode="Exclude">
+                                    <CombinedGeometry.Geometry1>
+                                        <RectangleGeometry Rect="0 0 155 30"></RectangleGeometry>
+                                    </CombinedGeometry.Geometry1>
+                                    <CombinedGeometry.Geometry2>
+                                        <RectangleGeometry Rect="-10 -10 165 40" RadiusX="10" RadiusY="10"></RectangleGeometry>
+                                    </CombinedGeometry.Geometry2>
+                                </CombinedGeometry>
+                            </Path.Data>
+                        </Path>
+                        <Border Background ="{StaticResource TransparentBlackBack}" CornerRadius=" 0 0 0 10">
+                            <TextBlock Foreground="White" Text="{TemplateBinding Content}"  FontSize="{StaticResource Small}" FontFamily="{StaticResource BaseFont}" FontWeight="Medium" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style x:Key="MiddleTabButton" TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="{StaticResource TransparentBlackBack}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <Border Background ="{TemplateBinding Background}" BorderThickness="0.5 0 0.5 0" BorderBrush="White">
+                            <TextBlock Foreground="White" Text="{TemplateBinding Content}"  FontSize="{StaticResource Small}" FontFamily="{StaticResource BaseFont}" FontWeight="Medium" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                        </Border>
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="True">
+                            <Setter Property="Background" Value="{StaticResource TransparentBlackBack}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Background" Value="#F2292B38" />
+                            <Setter Property="Cursor" Value="Hand"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter Property="Background" Value="#F2444757" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
 </ResourceDictionary>

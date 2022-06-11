@@ -3,12 +3,56 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:databinding="clr-namespace:ICAdmin.Converters"
       xmlns:local="clr-namespace:ICAdmin.Views"
+      DataContext="{Binding MainMenuViewModel, Source={StaticResource ViewModelLocator}}"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="MainMenuPage">
+    <Page.Resources>
+        <databinding:ImageConverter x:Key="ImageConverter"/>
+    </Page.Resources>
+    <Grid  Height="435" Width="740">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <!-- Вкладки -->
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="170"/>
+                <ColumnDefinition Width="155"/>
+                <ColumnDefinition Width="90"/>
+                <ColumnDefinition/>
 
-    <Grid>
-        
+            </Grid.ColumnDefinitions>
+
+            <Border BorderThickness="0" Background="White"></Border>
+            <TextBlock Grid.Column ="0"  Text ="Главное меню" Foreground="#070707" FontSize="14" FontFamily="Roboto" FontWeight="Medium" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+            <Button Grid.Column="1" Style="{StaticResource LeftTabButton}" Content="Статистика"/>
+            <Button Grid.Column="2" Style="{StaticResource MiddleTabButton}" Content="Чаты"/>
+            <Border Grid.Column="3" Background="{StaticResource TransparentBlackBack}"/>
+        </Grid>
+        <Border Background="White" Grid.Row="1"/>
+        <ListView BorderThickness="0" Grid.Row="2" Background="White" ItemsSource="{Binding UserMachines}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" HorizontalAlignment="Left" />
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="10 0 0 15">
+                        <Border Background="#373841" BorderThickness="0" CornerRadius="15" Width="70" Height="70">
+                            <Image Source="{Binding IsConnected, Converter={StaticResource ImageConverter}}" Width="45" Height="45"/>
+                        </Border>
+                        <TextBlock Text="{Binding InventoryName}" FontSize="{StaticResource Regular}" FontFamily="Rubik" FontWeight="Bold" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+
     </Grid>
 </Page>

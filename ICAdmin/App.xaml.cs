@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ICAdmin.ViewModels;
+using ICAdmin.Views;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +15,11 @@ namespace ICAdmin
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            ViewModelLocator.Init();
+
+            base.OnStartup(e);
+        }
     }
 }
