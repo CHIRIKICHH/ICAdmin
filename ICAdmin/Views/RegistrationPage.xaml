@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:ICAdmin.Views"
       mc:Ignorable="d" 
       d:DesignHeight="370" d:DesignWidth="310"
-      DataContext="{Binding LoginViewModel, Source={StaticResource ViewModelLocator}}"
+      DataContext="{Binding RegistrationViewModel, Source={StaticResource ViewModelLocator}}"
       FocusManager.FocusedElement="{Binding ElementName=LoginTextBox}"
       Title="RegistrationPage">
 

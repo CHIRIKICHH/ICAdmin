@@ -28,7 +28,7 @@ namespace ICAdmin
             services.AddSingleton<CheckConnectionService>();
             services.AddSingleton<AuthorizationService>();
             services.AddScoped<RegistrationService>();
-
+            services.AddScoped<AnyDeskService>();
 
 
             _provider = services.BuildServiceProvider();
@@ -41,6 +41,7 @@ namespace ICAdmin
 
         public MainWindowViewModel MainWindowViewModel => _provider.GetRequiredService<MainWindowViewModel>();
         public LoginViewModel LoginViewModel => _provider.GetRequiredService<LoginViewModel>();
+        public RegistrationViewModel RegistrationViewModel => _provider.GetRequiredService<RegistrationViewModel>();
         public MainMenuViewModel MainMenuViewModel => _provider.GetRequiredService<MainMenuViewModel>();
     }
 

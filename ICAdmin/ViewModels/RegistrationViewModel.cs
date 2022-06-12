@@ -11,7 +11,7 @@ using System.Windows.Input;
 
 namespace ICAdmin.ViewModels
 {
-    class RegistrationViewModel : BindableBase
+    public class RegistrationViewModel : BindableBase
     {
         private readonly PageService _pageService;
         private readonly CheckConnectionService _checkConnectionService;

@@ -10,6 +10,7 @@ namespace ICAdmin.Models
     {
         public int Id { get; set; }
         public string InventoryName { get; set; }
+        public User CurrentUser { get; set; }
         public bool IsConnected { get; set; }
     }
 }

@@ -22,6 +22,8 @@ namespace ICAdmin.Views
         public MainWindow()
         {
             InitializeComponent();
+            var blurBehavior = new BlurBehavior();
+            blurBehavior.Attach(this);
             
         }
 

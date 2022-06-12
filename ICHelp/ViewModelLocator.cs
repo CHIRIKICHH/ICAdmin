@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using ICHelp.Services;
+using ICHelp.ViewModels;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,18 +17,14 @@ namespace ICHelp
         {
             var services = new ServiceCollection();
 
-            services.AddTransient<MainWindowViewModel>();
-            services.AddScoped<LoginViewModel>();
-            services.AddScoped<RegistrationViewModel>();
-            services.AddScoped<MainMenuViewModel>();
-
+            services.AddTransient<MainPageViewModel>();
+           
             services.AddSingleton<PageService>();
-            services.AddSingleton<EventBus>();
-            services.AddSingleton<MessageBus>();
             services.AddSingleton<CheckConnectionService>();
             services.AddSingleton<AuthorizationService>();
             services.AddScoped<RegistrationService>();
-
+            services.AddSingleton<AssignmentService>();
+            services.AddSingleton<AnyDeskService>();
 
 
             _provider = services.BuildServiceProvider();
@@ -37,9 +35,7 @@ namespace ICHelp
             }
         }
 
-        public MainWindowViewModel MainWindowViewModel => _provider.GetRequiredService<MainWindowViewModel>();
-        public LoginViewModel LoginViewModel => _provider.GetRequiredService<LoginViewModel>();
-        public MainMenuViewModel MainMenuViewModel => _provider.GetRequiredService<MainMenuViewModel>();
+        public MainPageViewModel MainPageViewModel => _provider.GetRequiredService<MainPageViewModel>();
     }
 
 }

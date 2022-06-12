@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ICHelp.Services
 {
-    public class InventarizationService
+    public class AuthorizationService
     {
     }
 }

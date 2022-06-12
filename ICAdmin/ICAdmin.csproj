@@ -8,8 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\ComputeOfflineSelected.png" />
     <None Remove="Resources\ComputerOffline.png" />
     <None Remove="Resources\ComputerOnline.png" />
+    <None Remove="Resources\ComputerOnlineSelected.png" />
     <None Remove="Resources\Conneqt.TTF" />
     <None Remove="Resources\IClogo.png" />
     <None Remove="Resources\password.ttf" />
@@ -27,10 +29,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\ComputeOfflineSelected.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\ComputerOffline.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\ComputerOnline.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\ComputerOnlineSelected.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Conneqt.ttf">

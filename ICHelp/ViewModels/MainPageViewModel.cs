@@ -12,24 +12,34 @@ namespace ICHelp.ViewModels
 {
     public class MainPageViewModel : BindableBase
     {
+        private CheckConnectionService _checkConnectionService;
+        private PageService _pageService;
+        private AssignmentService _assignmentService;
+        private AuthorizationService _authorizationService;
+        private RegistrationService _registrationService;
+        private AnyDeskService _anyDeskService;
         public ObservableCollection<Message> Messages { get; set; }
 
-        public MainPageViewModel()
+        public MainPageViewModel(PageService pageService, AnyDeskService anyDeskService, AssignmentService assignmentService, AuthorizationService authorizationService, RegistrationService registrationService, CheckConnectionService checkConnectionService)
         {
             Messages = new ObservableCollection<Message>();
-
+            _checkConnectionService = checkConnectionService;
+            _pageService = pageService;
+            _assignmentService = assignmentService;
+            _authorizationService = authorizationService;
+            _registrationService = registrationService;
+            _anyDeskService = anyDeskService;
         }
 
-        private CheckConnectionService checkConnection = CheckConnectionService.GetInstance();
         public CheckConnectionService CheckConnection
         {
-            get => checkConnection;
+            get => _checkConnectionService;
         }
 
-        private AssignmentService assignmentService = AssignmentService.GetInstance();
-        public AssignmentService AssignmentService
+        public AnyDeskService AnyDesk
         {
-            get => assignmentService;
+            get => _anyDeskService;
         }
+
     }
 }

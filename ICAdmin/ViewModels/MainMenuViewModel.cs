@@ -1,4 +1,5 @@
 ﻿using DevExpress.Mvvm;
+using ICAdmin.Commands;
 using ICAdmin.Models;
 using ICAdmin.Services;
 using System;
@@ -17,12 +18,14 @@ namespace ICAdmin.ViewModels
         private readonly PageService _pageService;
         private readonly MessageBus _messageBus;
         private readonly AuthorizationService _authorizationService;
+        private readonly AnyDeskService _anyDeskService;
 
-        public MainMenuViewModel(PageService pageService, MessageBus meessageBus, AuthorizationService authorizationService)
+        public MainMenuViewModel(PageService pageService, MessageBus meessageBus, AuthorizationService authorizationService, AnyDeskService anyDeskService)
         {
             _pageService = pageService;
             _messageBus = meessageBus;
             _authorizationService = authorizationService;
+            _anyDeskService = anyDeskService;
             UserMachines = new ObservableCollection<UserMachine>();
 
             Random rnd = new Random();
@@ -30,6 +33,24 @@ namespace ICAdmin.ViewModels
             {
                 UserMachine userMachine = new UserMachine() { Id = i, InventoryName = $"СБ{i}", IsConnected = rnd.Next(0, 2) == 1 ? true : false };
                 UserMachines.Add(userMachine);
+            }
+        }
+
+        private RelayCommand connectAnyDeskCommand;
+        public RelayCommand ConnectAnyDeskCommand
+        {
+            get
+            {
+                return connectAnyDeskCommand ??
+                    (connectAnyDeskCommand = new RelayCommand(param => ConnectAnyDesk(param as UserMachine)));
+            }
+        }
+
+        private void ConnectAnyDesk(UserMachine userMachine)
+        {
+            if(userMachine != null)
+            {
+                _anyDeskService.GetCurrentAnyDeskId();
             }
         }
 

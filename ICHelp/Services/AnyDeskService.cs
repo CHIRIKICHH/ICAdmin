@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DevExpress.Mvvm;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -12,17 +13,35 @@ using System.Windows;
 
 namespace ICHelp.Services
 {
-    internal class AnyDeskService
+    public class AnyDeskService : BindableBase
     {
+        private string anyDeskId;
+        public string AnyDeskId { get => anyDeskId; set { anyDeskId = value; RaisePropertiesChanged("AnyDeskId"); } }
+
+        public AnyDeskService()
+        {
+            GetIdAsync();
+        }
+
+        public async void GetIdAsync()
+        {
+           AnyDeskId = await Task.Run(() => GetId()
+        );
+        }
         public string GetId()
         {
             if (StartService("AnyDesk"))
             {
-                return GetAnyDeskId();
+                string AnyDeskId = GetAnyDeskIdAsync().Result;
+                if (AnyDeskId == "0")
+                    AnyDeskId = GetAnyDeskIdAsync().Result;
+                return AnyDeskId;
             }
-            else if (File.Exists($"{Environment.CurrentDirectory}//progs//AnyDesk.exe")
+            else if (File.Exists($"{Environment.CurrentDirectory}\\progs\\AnyDesk.exe"))
             {
-                 StartProgram("");
+                var process = StartProgram($"--install {Environment.CurrentDirectory}\\AnyDesk --silent");
+                process.Start();
+                process.WaitForExit();
                 return GetId();
             }
             else
@@ -31,40 +50,44 @@ namespace ICHelp.Services
                 return GetId();
             }
         }
-
         private Process StartProgram(string argument)
         {
-            using (var process = new Process()) {
-                process.StartInfo.FileName = $"{Environment.CurrentDirectory}//progs//AnyDesk.exe";
-                process.StartInfo.Arguments = argument;
-                process.StartInfo.UseShellExecute = false; //Отключаем любой инферфейс у процесса, чтобы небыло никаких окон
-                process.StartInfo.CreateNoWindow = true; //отключаем также отображение на панели задач
-                process.StartInfo.RedirectStandardOutput = true;
-                process.Start();
-            return process;
+            if (!File.Exists($"{Environment.CurrentDirectory}\\progs\\AnyDesk.exe"))
+            {
+                DownloadAnyDesk();
             }
+            var process = new Process();
+            process.StartInfo.FileName = $"{Environment.CurrentDirectory}\\progs\\AnyDesk.exe";
+            process.StartInfo.Arguments = argument;
+            process.StartInfo.UseShellExecute = false; //Отключаем любой инферфейс у процесса, чтобы небыло никаких окон
+            process.StartInfo.CreateNoWindow = true; //отключаем также отображение на панели задач
+            process.StartInfo.RedirectStandardOutput = true;
+            return process;
+
         }
 
-        private string GetAnyDeskId()
+        private async Task<string> GetAnyDeskIdAsync()
         {
             using (var anyDeskProcess = StartProgram("--get-id"))
             {
+                anyDeskProcess.Start();
                 StreamReader stream = anyDeskProcess.StandardOutput;
-                string result = stream.ReadToEndAsync().Result;
+                string result = await stream.ReadToEndAsync();
                 return result;
             }
         }
-        private async void DownloadAnyDesk()
+
+        private void DownloadAnyDesk()
         {
             using (var client = new WebClient())
             {
                 try
                 {
-                    client.DownloadFileAsync(new Uri("https://download.anydesk.com/AnyDesk.exe"), $"{Environment.CurrentDirectory}//progs//AnyDesk.exe");
+                    client.DownloadFile(new Uri("https://download.anydesk.com/AnyDesk.exe"), $"{Environment.CurrentDirectory}\\progs\\AnyDesk.exe");
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "AnyDeskSerive Error");
+                    Console.WriteLine(ex.Message);
                 }
             }
         }
@@ -93,5 +116,6 @@ namespace ICHelp.Services
                 return false;
             }
         }
+
     }
 }

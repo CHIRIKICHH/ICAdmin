@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace ICHelp.Services
 {
-    internal class AssignmentService : BindableBase
+    public class AssignmentService : BindableBase
     {
         private static AssignmentService instance;
         private Queue<Assignment> Assignments { get; set; } = new Queue<Assignment>();
