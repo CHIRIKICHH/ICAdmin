@@ -1,4 +1,5 @@
 ﻿using DevExpress.Mvvm;
+using ICAdmin.Commands;
 using ICAdmin.Services;
 using ICAdmin.Views;
 using System;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace ICAdmin.ViewModels
 {
@@ -27,6 +29,14 @@ namespace ICAdmin.ViewModels
             _pageService.ChangePage(new LoginPage());
         }
 
+        private ICommand hideOverlay;
+        public ICommand HideOverlay
+        {
+            get {
+                return hideOverlay ??
+                    (hideOverlay = new RelayCommand(param => OverlayService.GetInstance().Close()));
+                }
+        }
         public CheckConnectionService CheckConnection
         {
             get

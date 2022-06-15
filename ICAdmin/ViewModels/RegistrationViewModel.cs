@@ -24,39 +24,37 @@ namespace ICAdmin.ViewModels
             _registrationService = registrationservice;
         }
 
-        private string login;
-        private string password;
-        private string repeatPassword;
-        public string Login { get => login; set { login = value; RaisePropertiesChanged("Login"); } }
-        public string Password { get; set; }
-        public string RepeatPassword { get; set; }
+        public string Login { get => GetValue<string>(); set => SetValue(value); }
+        public string Password { get => GetValue<string>(); set => SetValue(value); }
+        public string RepeatPassword { get => GetValue<string>(); set => SetValue(value); }
+        public bool IsNotRegistered { get => GetValue<bool>(); set => SetValue(value); }
 
-        private RelayCommand registrationCommand;
-        public RelayCommand RegistrationCommand
+        private ICommand registrationCommand;
+        public ICommand RegistrationCommand
         {
             get
             {
                 return registrationCommand ??
-                    (registrationCommand = new RelayCommand(param => Registration(param), param => CanReg(param)));
+                    (registrationCommand = new AsyncCommand(async () => {
+
+                        OverlayService.GetInstance().Show("Регистрация...");
+                        bool result = await _registrationService.RegistrationAsync(Login, Password);
+                        if (result)
+                        {
+                            ChangeLoginPage.Execute(null);
+                        }
+                        else
+                        {
+                            IsNotRegistered = true;
+                        }
+                        OverlayService.GetInstance().Close();
+                    }, () => CanReg()));
             }
         }
 
-        private async void Registration(object param)
+        private bool CanReg()
         {
-            bool result = await _registrationService.RegistrationAsync(login, Password);
-            if (result)
-            {
-               ChangeLoginPage.Execute(null);
-            }
-            else
-            {
-
-            }
-        }
-
-        private bool CanReg(object param)
-        {
-            if (Login != String.Empty && Password == RepeatPassword && Password.Length > 4)
+            if (!string.IsNullOrEmpty(Login) && !string.IsNullOrEmpty(Password) && Login.Length > 4 && Password == RepeatPassword && Password.Length > 8)
             {
                 if (_checkConnectionService.IsServerConnected)
                     return true;

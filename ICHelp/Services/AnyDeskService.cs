@@ -15,18 +15,31 @@ namespace ICHelp.Services
 {
     public class AnyDeskService : BindableBase
     {
-        private string anyDeskId;
-        public string AnyDeskId { get => anyDeskId; set { anyDeskId = value; RaisePropertiesChanged("AnyDeskId"); } }
+        private int anyDeskId;
+        public int AnyDeskId { get => anyDeskId; set { anyDeskId = value; RaisePropertiesChanged("AnyDeskId"); } }
 
         public AnyDeskService()
         {
             GetIdAsync();
+            SetPassword();
         }
 
         public async void GetIdAsync()
         {
-           AnyDeskId = await Task.Run(() => GetId()
-        );
+            AnyDeskId = await Task.Run(() => int.Parse(GetId())
+         );
+        }
+        public async void SetPassword()
+        {
+            await Task.Run(async () =>
+            {
+                var info = new ProcessStartInfo();
+                info.UseShellExecute = false;
+                info.CreateNoWindow = true;
+                info.Arguments = "/C " + $"echo eoJG0vaXdSaO | {Environment.CurrentDirectory}\\progs\\AnyDesk.exe --set-password _unattended_access";
+                info.FileName = "cmd.exe";
+                await Process.Start(info).WaitForExitAsync();
+            });
         }
         public string GetId()
         {
@@ -34,7 +47,14 @@ namespace ICHelp.Services
             {
                 string AnyDeskId = GetAnyDeskIdAsync().Result;
                 if (AnyDeskId == "0")
-                    AnyDeskId = GetAnyDeskIdAsync().Result;
+                {
+                    AnyDeskId = GetId();
+                }
+                else if (AnyDeskId == "SERVICE_NOT_RUNNING")
+                {
+                    StartProgram("--remove").Start();
+                    GetId();
+                }
                 return AnyDeskId;
             }
             else if (File.Exists($"{Environment.CurrentDirectory}\\progs\\AnyDesk.exe"))

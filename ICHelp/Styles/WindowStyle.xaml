@@ -16,16 +16,7 @@
                                 <RowDefinition Height="15"/>
                             </Grid.RowDefinitions>
 
-                            <Border x:Name ="ToolBar" Grid.Row="0" CornerRadius="10 10 0 0" Background ="{StaticResource TransparentBlackBack}">
-                                <inter:Interaction.Triggers>
-                                    <inter:EventTrigger EventName="MouseDown">
-                                        <inter:CallMethodAction MethodName="DragMove" 
-                                                                            TargetObject="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" />
-                                    </inter:EventTrigger>
-                                </inter:Interaction.Triggers>
-                            </Border>
-
-
+                            <Border x:Name ="ToolBar" Grid.Row="0" CornerRadius="10 10 0 0" Background ="{StaticResource TransparentBlackBack}"/>
                             <!-- Шапка формы-->
                             <Grid Grid.Row="0">
                                 <Grid.ColumnDefinitions>
@@ -37,24 +28,8 @@
 
                                 <!-- Кнопки управления окном-->
                                 <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Horizontal" Margin="0 0 15 0">
-                                    <Button Style="{StaticResource RollUpButton}" Cursor="Hand" Width="15" Height="15" Margin="0 0 15 0">
-                                        <inter:Interaction.Triggers>
-                                            <inter:EventTrigger EventName="Click">
-                                                <inter:ChangePropertyAction PropertyName="WindowState" 
-                                                                            TargetObject="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" 
-                                                                            Value="{Binding Source={x:Static sys:WindowState.Minimized}}"/>
-                                            </inter:EventTrigger>
-                                        </inter:Interaction.Triggers>
-                                    </Button>
-
-                                    <Button Style ="{StaticResource CloseButton}" Width="15" Height="15">
-                                        <inter:Interaction.Triggers>
-                                            <inter:EventTrigger EventName="Click">
-                                                <inter:CallMethodAction MethodName="Close" 
-                                                                            TargetObject="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" />
-                                            </inter:EventTrigger>
-                                        </inter:Interaction.Triggers>
-                                    </Button>
+                                    <Button Style="{StaticResource RollUpButton}" Cursor="Hand" Width="15" Height="15" Margin="0 0 15 0"/>
+                                    <Button Style ="{StaticResource CloseButton}" Width="15" Height="15"/>
                                 </StackPanel>
                             </Grid>
 

@@ -19,77 +19,44 @@ namespace ICAdmin.ViewModels
         private readonly CheckConnectionService _checkConnectionService;
         private readonly AuthorizationService _authorizationService;
 
-        private string login;
-        private string password;
-        private bool isNotLogged;
-
         public LoginViewModel(PageService pageService, MessageBus meessageBus, CheckConnectionService connectionService, AuthorizationService authorizationService)
         {
             _pageService = pageService;
             _messageBus = meessageBus;
             _checkConnectionService = connectionService;
             _authorizationService = authorizationService;
+            _authorizationService.OnAuthorized += () => ChangePage.Execute(null);
         }
 
         public bool IsNotLogged
         {
-            get { return isNotLogged; }
-            set
-            {
-                isNotLogged = value;
-                RaisePropertyChanged();
-            }
+            get => GetValue<bool>();
+            set => SetValue(value);
+            
         }
-        public string Login
-        {
-            get
-            {
-                return login;
-            }
-            set
-            {
-                login = value;
-            }
-        }
-        public string Password
-        {
-            get
-            {
-                return password;
-            }
-            set
-            {
-                password = value;
-            }
+        public string Login { get => GetValue<string>(); set => SetValue(value); }
+         
+        
+        public string Password { get => GetValue<string>(); set => SetValue(value); }
 
-        }
-
-        private RelayCommand loginCommand;
-        public RelayCommand LoginCommand
+        private ICommand loginCommand;
+        public ICommand LoginCommand
         {
             get
             {
                 return loginCommand ??
-                    (loginCommand = new RelayCommand(param => Authorization(param), param => CanAuth(param)));
+                    (loginCommand = new AsyncCommand(async () => {
+                        OverlayService.GetInstance().Show("Авторизация...");
+                        bool result = await _authorizationService.AuthorizationAsync(Login, Password);
+                        IsNotLogged = result;
+                        OverlayService.GetInstance().Close();
+                    } , () => CanAuth()));
             }
         }
 
-        private async void Authorization(object param)
+        private bool CanAuth()
         {
-            bool result = await _authorizationService.AuthorizationAsync(login, password);
-            if (result)
-            {
-                ChangePage.Execute(null);
-            }
-            else
-            {
-                IsNotLogged = true;
-            }
-        }
-
-        private bool CanAuth(object param)
-        {
-            if (!string.IsNullOrEmpty(login) && !string.IsNullOrEmpty(password) && _checkConnectionService.IsServerConnected)
+            if (!string.IsNullOrEmpty(Login) && !string.IsNullOrEmpty(Password) && _checkConnectionService.IsServerConnected)
                 return true;
             return false;
         }

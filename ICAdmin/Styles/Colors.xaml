@@ -23,5 +23,6 @@
     <SolidColorBrush x:Key="LightBrush" Color="white" />
     <Color x:Key="LightColor">white</Color>
 
-    <SolidColorBrush x:Key="TransparentBlackBack" Color="#F2181A24"/>
+    <SolidColorBrush x:Key="TransparentBlackBack" Color="#E5181A24"/>
+    <!--<SolidColorBrush x:Key="TransparentBlackBack" Color="#F2181A24"/>-->
 </ResourceDictionary>

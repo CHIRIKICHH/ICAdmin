@@ -10,7 +10,13 @@ namespace ICHelp.Models
     {
         public int Id { get; set; }
         public string Body { get; set; }
-        public User? Sender { get; set; }
-        public User? Recipient { get; set; }
+        public SenderType Sender { get; set; }
+        public DateTime SendTime { get; set; }
+    }
+
+    public enum SenderType
+    {
+        Employee = 0,
+        SysAdmin = 1
     }
 }

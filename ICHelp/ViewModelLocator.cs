@@ -17,12 +17,12 @@ namespace ICHelp
         {
             var services = new ServiceCollection();
 
-            services.AddTransient<MainPageViewModel>();
+            services.AddSingleton<MainPageViewModel>();
            
             services.AddSingleton<PageService>();
             services.AddSingleton<CheckConnectionService>();
             services.AddSingleton<AuthorizationService>();
-            services.AddScoped<RegistrationService>();
+            services.AddSingleton<RegistrationService>();
             services.AddSingleton<AssignmentService>();
             services.AddSingleton<AnyDeskService>();
 

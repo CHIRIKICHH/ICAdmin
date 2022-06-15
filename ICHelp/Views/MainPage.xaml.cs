@@ -24,5 +24,11 @@ namespace ICHelp.Views
         {
             InitializeComponent();
         }
+
+        private void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var listView = sender as ListView;
+            listView.ScrollIntoView(listView.SelectedItem);
+        }
     }
 }

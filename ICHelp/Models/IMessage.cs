@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ICHelp.Services
+namespace ICHelp.Models
 {
-    public class InventarizationService
+    public interface IMessage
     {
+        
     }
 }

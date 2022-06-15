@@ -14,20 +14,21 @@ namespace ICAdmin.Services
 {
     public class RegistrationService : BindableBase
     {
-        
+        private static readonly HttpClient _Client = new HttpClient();
         public async Task<bool> RegistrationAsync(string Login, string Password)
         {
             try
             {
-                var client = new HttpClient();
-                string resultJson = await client.GetStringAsync($"{Server.Domain}:{Server.Port}/api/Account/CreateUser?Login={Login}&Password={Password}");
-                User user = JsonConvert.DeserializeObject<User>(resultJson);
-                if (user.ErrorCode == null)
+               User user = new User() { Login = Login, Password = Hash.HashPassword(Password), Name = Login };
+                if (user != null)
                 {
-                    return true;
+                    string url = "http://chirikichh.ru:32000/api/Account/CreateUser";
+                    var json = System.Text.Json.JsonSerializer.Serialize(user);
+                    var response = await Request(HttpMethod.Post, url, json, new Dictionary<string, string>());
+                    string responseText = await response.Content.ReadAsStringAsync();
+                    return bool.Parse(responseText);
                 }
-                else
-                    return false;
+                return false;
             }
             catch (WebException ex)
             {
@@ -39,6 +40,31 @@ namespace ICAdmin.Services
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
+
+        }
+
+
+        static async Task<HttpResponseMessage> Request(HttpMethod pMethod, string pUrl, string pJsonContent, Dictionary<string, string> pHeaders)
+        {
+            var httpRequestMessage = new HttpRequestMessage();
+            httpRequestMessage.Method = pMethod;
+            httpRequestMessage.RequestUri = new Uri(pUrl);
+            foreach (var head in pHeaders)
+            {
+                httpRequestMessage.Headers.Add(head.Key, head.Value);
+            }
+            switch (pMethod.Method)
+            {
+                case "POST":
+                    HttpContent httpContent = new StringContent(pJsonContent, Encoding.UTF8, "application/json");
+                    httpRequestMessage.Content = httpContent;
+                    break;
+
+            }
+
+            return await _Client.SendAsync(httpRequestMessage);
         }
     }
+
+
 }

@@ -28,7 +28,7 @@
             <Border Background="White"></Border>
             <TextBlock Grid.Column ="0"  Text ="Вход" Foreground="#070707" FontSize="14" FontFamily="Roboto" FontWeight="Medium" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
 
-            <Button Style="{StaticResource LeftTabButton}"  Grid.Column="1" Content="Регистрация" Command="{Binding ChangeRegistrationPage}" />
+            <Button Style="{StaticResource RightTabButton}"  Grid.Column="1" Content="Регистрация" Command="{Binding ChangeRegistrationPage}" />
         </Grid>
 
 
@@ -41,7 +41,7 @@
 
             <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="260">
                 <TextBlock Text="ЛОГИН" FontFamily="Roboto" FontSize="16" FontWeight="Bold" />
-                <TextBox Text ="{Binding Login, Mode=TwoWay}" x:Name="LoginTextBox" Width="260" Height="40">
+                <TextBox Text ="{Binding Login, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="LoginTextBox" Width="260" Height="40" Cursor="IBeam">
                     <TextBox.Style>
                         <Style BasedOn="{StaticResource LoginTextBox}" TargetType="TextBox">
                             <Style.Triggers>
@@ -53,18 +53,20 @@
                                             </Storyboard>
                                         </BeginStoryboard>
                                     </DataTrigger.EnterActions>
-
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
                     </TextBox.Style>
+                    <TextBox.InputBindings>
+                        <KeyBinding FocusManager.FocusedElement="{Binding ElementName=x:PasswordTextBox}" Key="Return"/>
+                    </TextBox.InputBindings>
                 </TextBox>
             </StackPanel>
 
 
             <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="260">
                 <TextBlock Text="ПАРОЛЬ" FontFamily="Roboto" FontSize="16" FontWeight="Bold" />
-                <TextBox Text="{Binding Password, Mode=TwoWay}" x:Name="PasswordTextBox" FontFamily="{StaticResource Password}" Width="260" Height="40" >
+                <TextBox Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="PasswordTextBox" FontFamily="{StaticResource Password}" Width="260" Height="40" >
                     <TextBox.Style>
                         <Style BasedOn="{StaticResource PasswordTextBox}" TargetType="TextBox">
                             <Style.Triggers>
@@ -80,6 +82,9 @@
                             </Style.Triggers>
                         </Style>
                     </TextBox.Style>
+                    <TextBox.InputBindings>
+                        <KeyBinding Command="{Binding LoginCommand}" Key="Return"/>
+                    </TextBox.InputBindings>
                 </TextBox>
             </StackPanel>
             <StackPanel Grid.Row="2" VerticalAlignment="Bottom">

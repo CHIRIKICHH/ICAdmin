@@ -22,10 +22,9 @@
         </Grid.RowDefinitions>
 
 
-        <DockPanel>
-            <Button Style="{StaticResource RightTabButton}" Command="{Binding ChangeLoginPage}" Content="Вход"/>
-
-            <Border Background="White">
+        <DockPanel Grid.Row="0" HorizontalAlignment="Stretch">
+            <Button Style="{StaticResource LeftTabButton}" Command="{Binding ChangeLoginPage}" Width="155" Content="Вход"/>
+            <Border Background="White" Width="155">
                 <TextBlock Grid.Column ="1" Foreground="Black" Text="Регистрация" FontWeight="Medium" FontSize="14" FontFamily="Roboto" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
             </Border>
         </DockPanel>
@@ -41,7 +40,7 @@
 
             <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="260">
                 <TextBlock Text="ЛОГИН" FontFamily="Roboto" FontSize="16" FontWeight="Bold" />
-                <TextBox Text ="{Binding Login, Mode=TwoWay}" x:Name="LoginTextBox" Width="260" Height="40">
+                <TextBox Text ="{Binding Login, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="LoginTextBox" Width="260" Height="40" Cursor="IBeam">
                     <TextBox.Style>
                         <Style BasedOn="{StaticResource LoginTextBox}" TargetType="TextBox">
                             <Style.Triggers>
@@ -64,7 +63,7 @@
 
             <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="260">
                 <TextBlock Text="ПАРОЛЬ" FontFamily="Roboto" FontSize="16" FontWeight="Bold" />
-                <TextBox Text="{Binding Password, Mode=TwoWay}" x:Name="PasswordTextBox" FontFamily="{StaticResource Password}" Width="260" Height="40" >
+                <TextBox Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="PasswordTextBox" FontFamily="{StaticResource Password}" Width="260" Height="40" >
                     <TextBox.Style>
                         <Style BasedOn="{StaticResource PasswordTextBox}" TargetType="TextBox">
                             <Style.Triggers>
@@ -85,7 +84,7 @@
 
             <StackPanel Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="260">
                 <TextBlock Text="ПОВТОРИТЕ ПАРОЛЬ" FontFamily="Roboto" FontSize="16" FontWeight="Bold" />
-                <TextBox Text="{Binding RepeatPassword, Mode=TwoWay}" x:Name="PasswordTwoTextBox" FontFamily="{StaticResource Password}" Width="260" Height="40" >
+                <TextBox Text="{Binding RepeatPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="PasswordTwoTextBox" FontFamily="{StaticResource Password}" Width="260" Height="40" >
                     <TextBox.Style>
                         <Style BasedOn="{StaticResource PasswordTextBox}" TargetType="TextBox">
                             <Style.Triggers>
@@ -101,16 +100,19 @@
                             </Style.Triggers>
                         </Style>
                     </TextBox.Style>
+                    <TextBox.InputBindings>
+                        <KeyBinding Command="{Binding RegistrationCommand}" Key="Return"/>
+                        </TextBox.InputBindings>
                 </TextBox>
             </StackPanel>
 
             <StackPanel Grid.Row="3" VerticalAlignment="Center" Margin="0 25 0 0">
-                <Button Style="{StaticResource BaseButton}" Command="{Binding LoginCommand}" Content="Регистрация" x:Name="LoginButton" Width="260" Height="35"/>
+                <Button Style="{StaticResource BaseButton}" Command="{Binding RegistrationCommand}" Content="Регистрация" x:Name="LoginButton" Width="260" Height="35"/>
                 <TextBlock FontFamily="{StaticResource BaseFont}" HorizontalAlignment="Center" FontWeight="Bold" Margin="0 5 0 5" FontSize="11" Foreground="#E72F2F">
                     <TextBlock.Style>
                         <Style TargetType="{x:Type TextBlock}">
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding IsNotLogged, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                                <DataTrigger Binding="{Binding IsNotRegistered, UpdateSourceTrigger=PropertyChanged}" Value="True">
                                     <Setter Property="Text" Value="Данный пользователь уже зарегистрирован"/>
                                 </DataTrigger>
                             </Style.Triggers>

@@ -4,7 +4,7 @@
     <Style TargetType="ListView" x:Key="MachinesListView">
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
-
+        <Setter Property="SelectedItem" Value="{Binding SelectedUserMachine}"/>
         <Setter Property="ItemsPanel">
             <Setter.Value>
                 <ItemsPanelTemplate>

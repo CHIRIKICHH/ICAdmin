@@ -1,0 +1,47 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style TargetType="ListView" x:Key="MessangerListView">
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Background" Value="Gray"/>
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Visible"/>
+        <Setter Property="SelectedItem" Value="{Binding SelectedMessage}"/>
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Vertical" Height="Auto" VerticalAlignment="Top" Width="340" Margin="0 0 0 0" HorizontalAlignment="Stretch"/>
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style TargetType="ListViewItem" >
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <StackPanel Margin="0 0 10 5" Width="Auto" Height="Auto" >
+                        <Border Background="#3C3E46" Name="BackSelection" BorderThickness="0" Width="Auto" Height="Auto">
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Text="{Binding Body}" FontSize="13" TextWrapping="WrapWithOverflow" HorizontalAlignment="Left" Foreground="White" FontFamily="{StaticResource BaseFont}" FontWeight="Normal" Margin="10"/>
+                                <TextBlock Text="{Binding SendTime}" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontSize="9" Foreground="Gray" Margin="5 0 5 5"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding Sender}" Value="0">
+                                <Setter Property="HorizontalAlignment" Value="Right"/>
+                                <Setter Property="CornerRadius" TargetName="BackSelection" Value="15 15 0 15"/>
+                            </DataTrigger>
+                        <DataTrigger Binding="{Binding Sender}" Value="1">
+                            <Setter Property="HorizontalAlignment" Value="Left"/>
+                            <Setter Property="CornerRadius" TargetName="BackSelection" Value="15 15 15 0"/>
+                            <Setter Property="Background" TargetName="BackSelection" Value="#28292E"/>
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+</ResourceDictionary>

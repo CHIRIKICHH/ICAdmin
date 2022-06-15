@@ -16,34 +16,61 @@ namespace ICAdmin.Services
 {
     public class AuthorizationService : BindableBase
     {
-        private string _authorizationToken;
+        private static readonly HttpClient _Client = new HttpClient();
+
+        public event Action OnAuthorized;
+
         private User _currentUser;
-        public User CurrentUser { get => _currentUser; set { _currentUser = value; RaisePropertyChanged("CurrentUser"); } }
+        public string AuthorizationToken { get; set; }
+        public User CurrentUser { get => _currentUser; set { _currentUser = value; OnAuthorized.Invoke(); RaisePropertyChanged("CurrentUser"); } }
         public async Task<bool> AuthorizationAsync(string Login, string Password)
         {
             try
             {
-                var client = new HttpClient();
-                string resultJson = await client.GetStringAsync($"{Server.Domain}:{Server.Port}/api/Account/LoginUser?Login={Login}&Password={Password}");
-                User user = JsonConvert.DeserializeObject<User>(resultJson);
+                
+                    string url = "http://chirikichh.ru:32000/api/Account/LoginUser";
+                    var json = JsonConvert.SerializeObject(new {Login = Login, Password = Hash.HashPassword(Password)});
+                    var response = await Request(HttpMethod.Post, url, json, new Dictionary<string, string>());
+                    User user = JsonConvert.DeserializeObject<User>(await response.Content.ReadAsStringAsync());
                 if (user.ErrorCode == null)
                 {
                     CurrentUser = user;
-                    return true;
+                    return false;
                 }
                 else
-                    return false;
+                    return true;
             }
             catch (WebException ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                OverlayService.GetInstance().Show("Ошибка Авторизации" + Environment.NewLine + ex.Message);
                 return false;
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                OverlayService.GetInstance().Show("Ошибка Авторизации" + Environment.NewLine + ex.Message);
                 return false;
             }
+        }
+
+        static async Task<HttpResponseMessage> Request(HttpMethod pMethod, string pUrl, string pJsonContent, Dictionary<string, string> pHeaders)
+        {
+            var httpRequestMessage = new HttpRequestMessage();
+            httpRequestMessage.Method = pMethod;
+            httpRequestMessage.RequestUri = new Uri(pUrl);
+            foreach (var head in pHeaders)
+            {
+                httpRequestMessage.Headers.Add(head.Key, head.Value);
+            }
+            switch (pMethod.Method)
+            {
+                case "POST":
+                    HttpContent httpContent = new StringContent(pJsonContent, Encoding.UTF8, "application/json");
+                    httpRequestMessage.Content = httpContent;
+                    break;
+
+            }
+
+            return await _Client.SendAsync(httpRequestMessage);
         }
     }
 }

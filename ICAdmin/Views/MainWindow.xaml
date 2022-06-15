@@ -6,6 +6,7 @@
         xmlns:sys="clr-namespace:System.Windows;assembly=PresentationFramework"
         xmlns:local="clr-namespace:ICAdmin.Views"
         xmlns:model="clr-namespace:ICAdmin.Models"
+        xmlns:service="clr-namespace:ICAdmin.Services"
         xmlns:viewmodel="clr-namespace:ICAdmin.ViewModels"
         SizeToContent="WidthAndHeight"
         Style="{StaticResource WindowBlackStyle}"
@@ -13,7 +14,61 @@
         
         Title="ICAdmin" Height="Auto" Width="Auto" Icon="/Resources/IClogo.png">
 
+    <Window.Resources>
+        <ObjectDataProvider
+            x:Key="OverlayService"
+            MethodName="GetInstance"
+            ObjectType="{x:Type service:OverlayService}" />
+    </Window.Resources>
     <Grid Width="Auto">
         <Frame Content="{Binding PageSource}" NavigationUIVisibility="Hidden"/>
+
+        <!--  Оверлей  -->
+        <Grid
+            Name="overlay"
+            Grid.ColumnSpan="2"
+            Background="#7F302E31"
+            >
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=overlayText, Path=Text}" Value="">
+                            <Setter Property="Visibility" Value="Hidden" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+
+            <Border
+                Width="Auto"
+                Height="Auto"
+                MaxWidth="{Binding Path=ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+            MaxHeight="420"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Background="White"
+                CornerRadius="7">
+                <Grid>
+                    <Button Style="{StaticResource CloseButton}"  HorizontalAlignment="Right" Width="15" Height="15" VerticalAlignment="Top" Margin="10" Command="{Binding HideOverlay}"/>
+                    <StackPanel VerticalAlignment="Center" Margin="30 30 30 20">
+                        <TextBlock
+                            Name="overlayText"
+                            TextWrapping="WrapWithOverflow"
+                            FontSize="{StaticResource Regular}"
+                            FontWeight="Medium"
+                            FontFamily="{StaticResource BaseFont}"
+                            Text="{Binding Source={StaticResource OverlayService}, Path=Text}"
+                            TextAlignment="Center" />
+                        
+
+
+
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
+
     </Grid>
+    
+    
 </Window>

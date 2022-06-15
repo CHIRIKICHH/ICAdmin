@@ -32,8 +32,8 @@ namespace ICHelp.Services
         {
             AnyDeskId anyDeskId = new AnyDeskId();
             NewMessage newMessage = new NewMessage();
-            Inventorization inventorization = new Inventorization();
-            StartChain.SetNextAssignment(anyDeskId).SetNextAssignment(newMessage).SetNextAssignment(inventorization);
+            //Inventorization inventorization = new Inventorization();
+            //StartChain.SetNextAssignment(anyDeskId).SetNextAssignment(newMessage).SetNextAssignment(inventorization);
 
             CheckAssignmentAsync();
         }

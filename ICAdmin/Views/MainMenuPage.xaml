@@ -10,6 +10,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="MainMenuPage">
     
+    
     <Grid  Height="435" Width="740">
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>
@@ -28,28 +29,28 @@
 
             <Border BorderThickness="0" Background="White"></Border>
             <TextBlock Grid.Column ="0"  Text ="Главное меню" Foreground="#070707" FontSize="14" FontFamily="Roboto" FontWeight="Medium" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
-            <Button Grid.Column="1" Style="{StaticResource LeftTabButton}" Content="Статистика"/>
-            <Button Grid.Column="2" Style="{StaticResource MiddleTabButton}" Content="Чаты"/>
+            <Button Grid.Column="1" Style="{StaticResource RightTabButton}" Content="Статистика" Command="{Binding CheckOverlayCommand}"/>
+            <Button Grid.Column="2" Style="{StaticResource MiddleTabButton}" Content="Чаты" Command="{Binding OpenChatCommand}"/>
             <Border Grid.Column="3" Background="{StaticResource TransparentBlackBack}"/>
         </Grid>
         <Border Background="White" Grid.Row="1"/>
         <ListView Style="{StaticResource MachinesListView}" Grid.Row="2" Background="White" ItemsSource="{Binding UserMachines}">
             <ListView.ContextMenu>
                 <ContextMenu>
-                    <TextBlock Text="Текущий пользователь:"/>
+                    <TextBlock Text="{Binding SelectedUserMachine.CurrentUser.Name, StringFormat=Пользователь: {0}}"/>
                     <Separator/>
-                    <MenuItem Header="Подключиться по AnyDesk" Command="{Binding ConnectAnyDeskCommand}"/>
-                    <MenuItem Header="Подключиться по TeamViewer"/>
-                    <MenuItem Header="Подключиться по Тест метод"/>
+                    <MenuItem Header="Удаленный доступ" Command="{Binding ConnectAnyDeskCommand}"/>
+                    <MenuItem Header="Передача файлов" Command="{Binding FileTransferAnyDeskCommand}"/>
+                    <MenuItem Header="Перезагрузить компьютер" Command="{Binding CheckOverlayCommand}"/>
+                    <MenuItem Header="Выключить компьютер" Command="{Binding CheckOverlayCommand}"/>
                     <Separator/>
                     <MenuItem Header="Написать в чат"/>
-                    <MenuItem Header="Запущенныен процессы"/>
-                    <MenuItem Header="Характеристики"/>
+                    <MenuItem Header="Запущенныен процессы" Command="{Binding CheckOverlayCommand}"/>
+                    <MenuItem Header="Характеристики" Command="{Binding CheckOverlayCommand}"/>
                 </ContextMenu>
             </ListView.ContextMenu>
         </ListView>
-
-
+       
 
     </Grid>
 </Page>

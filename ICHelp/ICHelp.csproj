@@ -8,20 +8,30 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="progs\AnyDesk.exe" />
     <None Remove="Resources\Conneqt.ttf" />
     <None Remove="Resources\ICLogo.ico" />
     <None Remove="Resources\IClogo.png" />
     <None Remove="Resources\password.ttf" />
+    <None Remove="Resources\SysAdmin.png" />
     <None Remove="Resources\UserIcon.png" />
     <None Remove="Resources\UserWhiteIcon.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="progs\AnyDesk.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="DevExpressMvvm" Version="21.1.5" />
+    <PackageReference Include="Flurl.Http" Version="3.2.4" />
     <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.1.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.1" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="System.Management" Version="6.0.0" />
     <PackageReference Include="System.ServiceProcess.ServiceController" Version="6.0.0" />
   </ItemGroup>
 
@@ -37,6 +47,9 @@
     </Resource>
     <Resource Include="Resources\password.ttf">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\SysAdmin.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\UserIcon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -67,6 +80,14 @@
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Styles\ScrollBar.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Styles\TextBoxes.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Styles\WindowStyle.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
@@ -74,9 +95,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Inventorization\Models\" />
     <Folder Include="Inventorization\Services\" />
-    <Folder Include="progs\" />
   </ItemGroup>
 
 </Project>

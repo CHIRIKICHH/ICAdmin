@@ -15,7 +15,7 @@ namespace ICHelp.Behavior
         public override string Execute(AssignmentType command)
         {
             if (command == AssignmentType.GetCurrentAnyDeskId)
-                return new AnyDeskService().AnyDeskId;
+                return "";
             else
                 return base.Execute(command);
         }

@@ -18,9 +18,10 @@ namespace ICAdmin
             var services = new ServiceCollection();
 
             services.AddTransient<MainWindowViewModel>();
-            services.AddScoped<LoginViewModel>();
-            services.AddScoped<RegistrationViewModel>();
+            services.AddTransient<LoginViewModel>();
+            services.AddTransient<RegistrationViewModel>();
             services.AddScoped<MainMenuViewModel>();
+            services.AddScoped<ChatViewModel>();
 
             services.AddSingleton<PageService>();
             services.AddSingleton<EventBus>();
@@ -29,6 +30,7 @@ namespace ICAdmin
             services.AddSingleton<AuthorizationService>();
             services.AddScoped<RegistrationService>();
             services.AddScoped<AnyDeskService>();
+            services.AddScoped<UserMachineService>();
 
 
             _provider = services.BuildServiceProvider();
@@ -43,6 +45,7 @@ namespace ICAdmin
         public LoginViewModel LoginViewModel => _provider.GetRequiredService<LoginViewModel>();
         public RegistrationViewModel RegistrationViewModel => _provider.GetRequiredService<RegistrationViewModel>();
         public MainMenuViewModel MainMenuViewModel => _provider.GetRequiredService<MainMenuViewModel>();
+        public ChatViewModel ChatViewModel => _provider.GetRequiredService<ChatViewModel>();
     }
 
 }

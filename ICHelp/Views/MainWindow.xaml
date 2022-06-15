@@ -17,6 +17,7 @@
                     IconSource="pack://application:,,,/Resources/ICLogo.ico"
                     PopupActivation="LeftClick"
                         MenuActivation="RightClick"
+
       >
             <tb:TaskbarIcon.ContextMenu>
                 <ContextMenu Style="{StaticResource BaseContextMenu}" BorderThickness="0" >
@@ -24,7 +25,7 @@
                     <Separator/>
                     <MenuItem Header="Настройки"/>
                     <MenuItem Header="Сообщить об ошибке"/>
-                    <MenuItem Header="Закрыть"/>
+                    <MenuItem Header="Закрыть" Click="MenuItem_Click"/>
                 </ContextMenu>
             </tb:TaskbarIcon.ContextMenu>
             <tb:TaskbarIcon.TrayPopup>

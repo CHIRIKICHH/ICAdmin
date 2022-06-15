@@ -3,37 +3,30 @@
                     >
 
     <Style x:Key="BaseButton" TargetType="Button">
-        <Setter Property="Background" Value="{StaticResource MediumBaseBrush}" />
-        <Setter Property="FontFamily" Value="{StaticResource BaseFont}" />
-        <Setter Property="FontSize" Value="{StaticResource Regular}" />
-        <Setter Property="FontWeight" Value="Bold"/>
-        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Background" Value="Transparent" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border
                         Name="brd"
                         Background="{TemplateBinding Background}"
-                        CornerRadius="2">
-                        <ContentPresenter
-                            Margin="5"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center" />
+                        CornerRadius="20">
+                        <ContentControl Style="{StaticResource IconContent}" Margin="2" Content="{StaticResource SendIcon}"/>
                     </Border>
 
 
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsDefaulted" Value="true">
-                            <Setter Property="Background" Value="{StaticResource MediumBaseBrush}" />
+                            <Setter Property="Background" Value="#373841" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="Background" Value="{StaticResource LightBaseBrush}" />
+                            <Setter TargetName="brd" Property="Background" Value="#535461" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
-                            <Setter Property="Background" Value="{StaticResource UltraLightBaseBrush}" />
+                            <Setter  TargetName="brd" Property="Background" Value="#6F707D" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Background" Value="{StaticResource DarkBrush}" />
+                            <Setter  TargetName="brd" Property="Background" Value="{StaticResource DarkBrush}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

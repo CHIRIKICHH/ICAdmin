@@ -26,6 +26,8 @@
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="PropertyChanged.Fody" Version="3.4.1" />
+    <PackageReference Include="System.ServiceProcess.ServiceController" Version="6.0.0" />
+    <PackageReference Include="XAct.Core.PCL" Version="0.0.5014" />
   </ItemGroup>
 
   <ItemGroup>
@@ -56,6 +58,10 @@
     <Resource Include="Resources\UserWhiteIcon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="progs\" />
   </ItemGroup>
 
 </Project>
