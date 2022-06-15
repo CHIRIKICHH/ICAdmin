@@ -15,14 +15,12 @@ namespace ICAdmin.ViewModels
     public class LoginViewModel : BindableBase
     {
         private readonly PageService _pageService;
-        private readonly MessageBus _messageBus;
         private readonly CheckConnectionService _checkConnectionService;
         private readonly AuthorizationService _authorizationService;
 
-        public LoginViewModel(PageService pageService, MessageBus meessageBus, CheckConnectionService connectionService, AuthorizationService authorizationService)
+        public LoginViewModel(PageService pageService, CheckConnectionService connectionService, AuthorizationService authorizationService)
         {
             _pageService = pageService;
-            _messageBus = meessageBus;
             _checkConnectionService = connectionService;
             _authorizationService = authorizationService;
             _authorizationService.OnAuthorized += () => ChangePage.Execute(null);

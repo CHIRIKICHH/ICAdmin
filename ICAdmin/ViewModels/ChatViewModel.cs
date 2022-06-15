@@ -16,18 +16,30 @@ namespace ICAdmin.ViewModels
     public class ChatViewModel : BindableBase
     {
         private readonly PageService _pageService;
-        private readonly MessageBus _messageBus;
 
         public User SelectedUser { get => GetValue<User>(); set => SetValue(value); }
         public ObservableCollection<User> Users;
         public ObservableCollection<Message> Messages;
-        public ChatViewModel(PageService pageService, MessageBus meessageBus)
+        public ChatViewModel(PageService pageService)
         {
             _pageService = pageService;
-            _messageBus = meessageBus;
 
             Users = new ObservableCollection<User>();
-            Messages = SelectedUser.Messages;
+            //Messages = SelectedUser.Messages;
+        }
+
+        private ICommand sendMessage;
+        public ICommand SendMessage
+        {
+            get
+            {
+                return sendMessage ??
+                    (sendMessage = new AsyncCommand(async () => 
+                    { 
+                        
+                    }
+                    ));
+            }
         }
 
         private ICommand checkOverlayCommand;

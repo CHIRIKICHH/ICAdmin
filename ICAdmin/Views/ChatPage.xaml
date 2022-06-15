@@ -9,7 +9,7 @@
       Title="ChatPage"
       DataContext="{Binding ChatViewModel, Source={StaticResource ViewModelLocator}}"
       >
-    
+
     <Grid  Height="435" Width="740">
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>
@@ -32,7 +32,7 @@
             </Border>
             <Button Grid.Column="3" Background="{StaticResource TransparentBlackBack}" Style="{StaticResource RightTabButton}" IsEnabled="False"/>
 
-           
+
         </Grid>
         <Grid Grid.Row="1" Background="White">
             <Grid.ColumnDefinitions>
@@ -41,8 +41,12 @@
             </Grid.ColumnDefinitions>
 
             <ListView Margin="15 10 0 0" BorderThickness="0">
-                
+
             </ListView>
+            <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Orientation="Horizontal">
+                <TextBox  Width="300"  Margin="15" Text="{Binding MessageBody}"/>
+                <Button Content="Send" Command="{Binding SendMessage}"/>
+            </StackPanel>
         </Grid>
     </Grid>
 </Page>

@@ -25,7 +25,6 @@ namespace ICAdmin
 
             services.AddSingleton<PageService>();
             services.AddSingleton<EventBus>();
-            services.AddSingleton<MessageBus>();
             services.AddSingleton<CheckConnectionService>();
             services.AddSingleton<AuthorizationService>();
             services.AddScoped<RegistrationService>();

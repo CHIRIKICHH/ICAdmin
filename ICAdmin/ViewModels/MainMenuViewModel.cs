@@ -21,15 +21,13 @@ namespace ICAdmin.ViewModels
         public UserMachine SelectedUserMachine { get; set; }
 
         private readonly PageService _pageService;
-        private readonly MessageBus _messageBus;
         private readonly AuthorizationService _authorizationService;
         private readonly UserMachineService _userMachineService;
         private readonly AnyDeskService _anyDeskService;
 
-        public MainMenuViewModel(PageService pageService, MessageBus meessageBus, AnyDeskService anyDeskService, AuthorizationService authorizationService, UserMachineService userMachineService)
+        public MainMenuViewModel(PageService pageService, AnyDeskService anyDeskService, AuthorizationService authorizationService, UserMachineService userMachineService)
         {
             _pageService = pageService;
-            _messageBus = meessageBus;
             _authorizationService = authorizationService;
             _userMachineService = userMachineService;
             _anyDeskService = anyDeskService;

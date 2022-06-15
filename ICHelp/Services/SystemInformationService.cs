@@ -17,7 +17,7 @@ namespace ICHelp.Services
     {
         public SystemInformationService()
         {
-            
+
         }
 
         public async Task<UserMachine> GetSystemInfoAsync()
@@ -43,10 +43,10 @@ namespace ICHelp.Services
                      WindowsAccountName = Environment.UserName,
                  });
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                MessageBox.Show(ex.Message,"Ошибка получения информации о системе");
-                throw ex;
+                MessageBox.Show(ex.Message, "Ошибка получения информации о системе");
+                return null;
             }
         }
 
@@ -70,18 +70,28 @@ namespace ICHelp.Services
                 };
                 return Invent;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                MessageBox.Show(ex.Message,"Ошибка инвенторизации");
+                MessageBox.Show(ex.Message, "Ошибка инвенторизации");
                 return null;
             }
         }
         private async Task<string> GetInventorizationName()
         {
-            var client = new HttpClient();
-            string resultJson = await client.GetStringAsync($"{Server.Domain}:{Server.Port}/api/UserMachines/GetInventoryName");
-            string result = JsonConvert.DeserializeObject<string>(resultJson);
-            return result;
+            try
+            {
+                var client = new HttpClient();
+                string resultJson = await client.GetStringAsync($"{Server.Domain}:{Server.Port}/api/UserMachines/GetInventoryName");
+                if (resultJson.Length != 6)
+                    return resultJson;
+                else
+                    return "";
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка получения инвентарного номера");
+                return "Error";
+            }
         }
         public static string GetWMIInfo(string TableName, params string[] ObjectName)
         {

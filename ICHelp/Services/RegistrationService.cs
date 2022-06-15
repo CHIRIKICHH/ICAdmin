@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using DevExpress.Mvvm;
+using ICHelp.Inventorization.Models;
 using ICHelp.Models;
 using Newtonsoft.Json;
 
@@ -14,6 +15,7 @@ namespace ICHelp.Services
     public class RegistrationService : BindableBase
     {
         private bool isRegistrated;
+        public UserMachine CurrentUserMachine { get => GetValue<UserMachine>(); set => SetValue(value); }
         public bool IsRegistrated { get => isRegistrated; set { isRegistrated = value; RaisePropertiesChanged("IsRegistrated"); } }
         CheckConnectionService connection = CheckConnectionService.GetInstance();
         private static readonly HttpClient _Client = new HttpClient();
@@ -29,6 +31,8 @@ namespace ICHelp.Services
             {
                 await Task.Run(() =>
                 {
+                    var systemInfo = new SystemInformationService();
+                    CurrentUserMachine = systemInfo.GetSystemInfoAsync().Result;
                     if (CheckRegistrationAsync().Result)
                     {
                         IsRegistrated = true;
@@ -56,23 +60,28 @@ namespace ICHelp.Services
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка регистрации!");
+                MessageBox.Show(ex.Message, "Ошибка проверки регистрации!");
                 return false;
             }
         }
 
         public async void RegistrationAsync()
         {
-
-            var info = new SystemInformationService();
-            var machine = await info.GetSystemInfoAsync();
-            if (machine != null)
+            try
             {
-                string url = $"http://{Server.Domain}:{Server.Port}/api/UserMachines/RegistrationMachine";
-                var json = System.Text.Json.JsonSerializer.Serialize(machine);
-                var response = await Request(HttpMethod.Post, url, json, new Dictionary<string, string>());
-                string responseText = await response.Content.ReadAsStringAsync();
-                IsRegistrated = bool.Parse(responseText);
+                if (CurrentUserMachine != null)
+                {
+                    string url = $"{Server.Domain}:{Server.Port}/api/UserMachines/RegistrationMachine";
+                    var json = System.Text.Json.JsonSerializer.Serialize(CurrentUserMachine);
+                    var response = await Request(HttpMethod.Post, url, json, new Dictionary<string, string>());
+                    string responseText = await response.Content.ReadAsStringAsync();
+                    IsRegistrated = bool.Parse(responseText);
+                }
+            }
+            catch(Exception ex)
+            {
+                IsRegistrated = false;
+                MessageBox.Show(ex.Message, "Ошибка регистрации!");
             }
         }
 
