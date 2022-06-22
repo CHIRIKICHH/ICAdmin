@@ -24,7 +24,6 @@ namespace ICHelp
             services.AddSingleton<CheckConnectionService>();
             services.AddSingleton<AuthorizationService>();
             services.AddSingleton<RegistrationService>();
-            services.AddSingleton<AssignmentService>();
             services.AddSingleton<AnyDeskService>();
             services.AddSingleton<MessageService>();
 

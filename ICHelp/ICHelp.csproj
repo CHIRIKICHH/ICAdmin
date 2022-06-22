@@ -8,14 +8,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Inventorization\Services\**" />
+    <EmbeddedResource Remove="Inventorization\Services\**" />
+    <None Remove="Inventorization\Services\**" />
+    <Page Remove="Inventorization\Services\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="progs\AnyDesk.exe" />
     <None Remove="Resources\Conneqt.ttf" />
     <None Remove="Resources\ICLogo.ico" />
     <None Remove="Resources\IClogo.png" />
-    <None Remove="Resources\password.ttf" />
     <None Remove="Resources\SysAdmin.png" />
-    <None Remove="Resources\UserIcon.png" />
-    <None Remove="Resources\UserWhiteIcon.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -45,25 +49,12 @@
     <Resource Include="Resources\IClogo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Resources\password.ttf">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
     <Resource Include="Resources\SysAdmin.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\UserIcon.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\UserWhiteIcon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
 
   <ItemGroup>
-    <Page Update="Styles\Animations.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Update="Styles\Buttons.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
@@ -92,10 +83,6 @@
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Inventorization\Services\" />
   </ItemGroup>
 
 </Project>

@@ -11,15 +11,9 @@ using System.Threading.Tasks;
 
 namespace ICHelp.Models
 {
-    internal class Server : BaseVM
+    internal class Server
     {
         public static readonly string Domain = "http://chirikichh.ru";
         public static readonly int Port = 32000;
-        public static bool IsConnected { get; set; }
-        public Server()
-        {
-
-        }
-
     }
 }

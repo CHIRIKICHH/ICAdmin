@@ -16,7 +16,6 @@ namespace ICHelp.ViewModels
     {
         private CheckConnectionService _checkConnectionService;
         private PageService _pageService;
-        private AssignmentService _assignmentService;
         private AuthorizationService _authorizationService;
         private RegistrationService _registrationService;
         private AnyDeskService _anyDeskService;
@@ -25,12 +24,11 @@ namespace ICHelp.ViewModels
         public Message SelectedMessage { get => GetValue<Message>(); set => SetValue(value); }
 
 
-        public MainPageViewModel(PageService pageService, AnyDeskService anyDeskService, AssignmentService assignmentService, AuthorizationService authorizationService, RegistrationService registrationService, CheckConnectionService checkConnectionService, MessageService messageService)
+        public MainPageViewModel(PageService pageService, AnyDeskService anyDeskService, AuthorizationService authorizationService, RegistrationService registrationService, CheckConnectionService checkConnectionService, MessageService messageService)
         {
             Messages = new ObservableCollection<Message>();
             _checkConnectionService = checkConnectionService;
             _pageService = pageService;
-            _assignmentService = assignmentService;
             _authorizationService = authorizationService;
             _registrationService = registrationService;
             _anyDeskService = anyDeskService;
